@@ -1,0 +1,71 @@
+name: Build, Push to GCR, and Deploy to Cloud Run
+
+on:
+  push:
+    branches: [ "main" ] # Or your main development branch
+
+env:
+  GCP_PROJECT_ID: ${{ secrets.GCP_PROJECT_ID }} # Your Google Cloud Project ID (stored as a GitHub secret)
+  GCP_REGION: us-west4 # Or your desired GCP region for Artifact Registry and Cloud Run
+  REPO_NAME: personal
+  IMAGE_NAME: personal-portfolio
+  SERVICE_NAME: personal-portfolio # The name of your Cloud Run service
+  # API_KEY: ${{ secrets.API_KEY }}
+
+jobs:
+  build-push-deploy:
+    name: Build, Push, and Deploy
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      # Authenticate to Google Cloud
+      - name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v2
+        with:
+          credentials_json: ${{ secrets.GCP_SA_KEY }} # Your Google Cloud Service Account key (stored as a GitHub secret)
+
+      # Set up Docker Buildx
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Debug - Authenticate again (explicitly)
+        run: |
+          gcloud auth configure-docker ${{ env.GCP_REGION }}-docker.pkg.dev --quiet
+
+      # Build and Push Docker Image
+      - name: Build and Push Docker Image
+        id: build-push
+        uses: docker/build-push-action@v5
+        with:
+          context: . # Path to your Dockerfile
+          file: Dockerfile
+          push: true
+          tags: ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }}
+          labels: |
+            org.opencontainers.image.revision=${{ github.sha }}
+            org.opencontainers.image.source=${{ github.server_url }}/${{ github.repository }}/commit/${{ github.sha }}
+          # build-args: |
+          #   API_KEY=${{ env.API_KEY }}
+
+      # Deploy to Google Cloud Run
+      - name: Deploy to Google Cloud Run
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: ${{ env.SERVICE_NAME }}
+          region: ${{ env.GCP_REGION }}
+          image: ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }} # Use the image digest for immutability
+          project_id: ${{ env.GCP_PROJECT_ID }}
+          # Optional: Add environment variables
+          # env_vars: |
+          #   API_KEY: ${{ secrets.API_KEY }}
+          # Optional: Set traffic split (e.g., 100 for full rollout)
+          # traffic: 100
+          # Optional: Add other Cloud Run configurations as needed
+          # platform: managed # Default is managed
+          # memory: 512Mi
+          # cpu: 1
+          # min_instances: 0
+          # max_instances: 3
