@@ -17,7 +17,7 @@ async fn main() -> Result<()> {
         .route("/about", get(handle_about))
         .route("/list", get(handle_list))
         .route("/snake", get(handle_snake))
-        .fallback_service(ServeDir::new("static"));
+        .fallback_service(ServeDir::new("static").precompressed_gzip());
 
     // run our app with hyper, listening globally on port 3000
     let listener = TcpListener::bind((Ipv4Addr::UNSPECIFIED, 3000)).await?;
