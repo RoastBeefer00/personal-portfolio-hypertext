@@ -42,9 +42,11 @@ pub fn home() -> impl Renderable {
                         " creating CLIs, TUIs,
                         and websites with Rust! At work I've created multiple CLIs in
                         Rust to help automate tasks and make key information more easily
-                        accessible. Most recently I created the game "snake" using the Rust game 
+                        accessible. Most recently I created the game \"snake\" using the Rust game 
                         engine "
                         <a href="https://bevyengine.org/" class="underline">"Bevy"</a>
+                        ".  If fact, this website was "
+                        <a href="https://www.github.com/RoastBeefer00/personal-portfolio-hypertext" class="underline">"made with Rust"</a>
                         "!"
                     </p>
                 </StackCard>
@@ -55,7 +57,7 @@ pub fn home() -> impl Renderable {
                     img_url="go.png"
                 >
                     <p>
-                        "Go is an awesome language and I'm very glad I learned it. I use Go at
+                        "Go is an awesome language and a joy to work with. I use Go at
                         work as my scripting language of choice.  It has great GCP integration and 
                         the type system can be quite powerful.  Go can be the right tool for the 
                         job when you need fearless concurrency or maybe when you want to prototype something
@@ -94,8 +96,9 @@ pub fn home() -> impl Renderable {
                         to set up everything exactly how I want it."
                     </p>
                     <p>
-                        "If you leave the terminal or touch your mouse you've already
-                        lost!"
+                        "I have a very terminal-centric workflow and am a firm believer in knowing
+                        your toolset very well.  Combining Neovim with Tmux allows me to edit and hop around very quickly
+                        without ever leaving my keyboard."
                     </p>
                 </StackCard>
                 <StackCard
@@ -114,6 +117,19 @@ pub fn home() -> impl Renderable {
                     <p>
                         "I've combined Svelte with a Python FastAPI as well as a Rust
                         backend compiled to WebAssembly."
+                    </p>
+                </StackCard>
+                <StackCard
+                    title="HTMX"
+                    link="https://www.htmx.org/"
+                    bg_color="bg-pink"
+                    img_url="htmx.png"
+                >
+                    <p>
+                        "HTMX allows me to make websites made via HTML templating (like this one)
+                        feel like a single page app (SPA).  This is extremely powerful and my current 
+                        preferred way to make websites.  It allows me to focus on the backend logic and 
+                        state throughout the development process."
                     </p>
                 </StackCard>
                 <StackCard

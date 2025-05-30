@@ -29,8 +29,8 @@ pub async fn handle_about(hx_request: HxRequest) -> impl IntoResponse {
     maybe_document(hx_request, "/about", about())
 }
 
-pub async fn handle_list(hx_request: HxRequest) -> impl IntoResponse {
-    maybe_document(hx_request, "/list", projects())
+pub async fn handle_projects(hx_request: HxRequest) -> impl IntoResponse {
+    maybe_document(hx_request, "/projects", projects())
 }
 
 pub async fn handle_snake(hx_request: HxRequest) -> impl IntoResponse {

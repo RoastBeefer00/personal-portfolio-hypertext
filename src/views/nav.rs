@@ -5,7 +5,7 @@ pub fn nav<'a>(selected: &'a str, oob: bool) -> impl Renderable {
     let routes = [
         ("Home", "/"),
         ("About", "/about"),
-        ("Projects", "/list"),
+        ("Projects", "/projects"),
         ("Snake", "/snake"),
     ];
 
