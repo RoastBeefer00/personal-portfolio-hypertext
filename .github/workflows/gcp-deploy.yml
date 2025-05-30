@@ -69,5 +69,4 @@ jobs:
           cpu: 1
           min_instances: 0
           max_instances: 1
-          with:
-            flags: '--port=3000'
+          flags: '--port=3000'
