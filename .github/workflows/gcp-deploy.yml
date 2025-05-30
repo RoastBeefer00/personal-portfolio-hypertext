@@ -55,7 +55,7 @@ jobs:
         uses: google-github-actions/deploy-cloudrun@v2
         with:
           service: ${{ env.SERVICE_NAME }}
-          region: ${{ env.GCP_REGION }}
+          region: us-west1
           image: ${{ env.GCP_REGION }}-docker.pkg.dev/${{ env.GCP_PROJECT_ID }}/${{ env.REPO_NAME }}/${{ env.IMAGE_NAME }}:${{ github.sha }} # Use the image digest for immutability
           project_id: ${{ env.GCP_PROJECT_ID }}
           # Optional: Add environment variables
@@ -65,7 +65,9 @@ jobs:
           # traffic: 100
           # Optional: Add other Cloud Run configurations as needed
           # platform: managed # Default is managed
-          # memory: 512Mi
-          # cpu: 1
-          # min_instances: 0
-          # max_instances: 3
+          memory: 128Mi
+          cpu: 1
+          min_instances: 0
+          max_instances: 1
+          with:
+            flags: '--port=3000'
