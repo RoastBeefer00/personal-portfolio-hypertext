@@ -4,6 +4,7 @@ const TAILWIND_CSS: &str = "tailwind.css";
 
 fn main() {
     println!("cargo:rerun-if-changed=src/views/");
+    println!("cargo:rerun-if-changed={TAILWIND_CSS}");
 
     let output = Command::new("npx")
         .args([

@@ -9,7 +9,7 @@ pub fn stack_card<'a, R: Renderable>(
     children: &R,
 ) -> impl Renderable {
     rsx! {
-        <div class=(format!("rounded p-2 {bg_color} shadow-md shadow-crust m-2"))>
+        <div class={ "rounded p-2 shadow-md shadow-crust m-2 " (bg_color) }>
             <div class="flex border-b-2 border-gray-900">
                 <h2 class="flex-auto text-gray-900 font-bold text-3xl m-2">
                     <a href=(link)>(title)</a>

@@ -19,7 +19,7 @@ pub fn document<'a, R: Renderable>(selected: &'a str, children: &R) -> impl Rend
             </head>
             <body class="bg-base text-gray-100">
                 // <h1 class="flex text-5xl mx-auto font-bold justify-center items-center mb-2">Hypertext</h1>
-                <Nav selected=selected oob=true />
+                <Nav selected=selected oob=false />
                 <div id="page" class="mt-2">
                     (children)
                 </div>
