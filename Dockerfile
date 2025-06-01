@@ -14,7 +14,7 @@ RUN npm install
 
 # Copy the rest of your frontend assets and Tailwind config
 # Ensure your tailwind.config.js and your main input CSS file (e.g., styles/tailwind.css) are present
-COPY tailwind.config.js ./
+# COPY tailwind.config.js ./
 COPY tailwind.css ./
  # If your Rust source files influence Tailwind's content scanning (e.g. for class names)
 COPY src ./src
