@@ -10,7 +10,7 @@ pub fn nav<'a>(selected: &'a str, oob: bool) -> impl Renderable {
     ];
 
     rsx! {
-        <nav id="nav" class="text-text border-b border-b-blue" hx-swap-oob=(oob)>
+        <nav id="nav" class="text-text border-b border-b-blue" hx-swap-oob=true[oob]>
             <ul class="flex flex-row items-center justify-center">
                 @for (name, path) in routes {
                     <a
