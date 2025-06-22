@@ -12,7 +12,6 @@ mod views;
 
 #[tokio::main]
 async fn main() -> Result<()> {
-    // build our application with a route
     let mut app = Router::new()
         .route("/", get(handle_home))
         .route("/about", get(handle_about))
