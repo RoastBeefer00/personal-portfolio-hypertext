@@ -2,8 +2,10 @@ use hypertext::prelude::*;
 
 use crate::views::nav::Nav;
 
+use super::Page;
+
 #[component]
-pub fn document<'a, R: Renderable>(selected: &'a str, children: &R) -> impl Renderable {
+pub fn document<R: Renderable>(selected: Page, children: &R) -> impl Renderable {
     rsx! {
         <!DOCTYPE html>
         <html>

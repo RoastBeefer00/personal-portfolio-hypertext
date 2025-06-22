@@ -1,35 +1,32 @@
 use hypertext::prelude::*;
+use strum::IntoEnumIterator;
 
+use super::Page;
+
+#[allow(unused_parens)]
 #[component]
-pub fn nav<'a>(selected: &'a str, oob: bool) -> impl Renderable {
-    let routes = [
-        ("Home", "/"),
-        ("About", "/about"),
-        ("Projects", "/projects"),
-        ("Snake", "/snake"),
-    ];
-
+pub fn nav(selected: Page, oob: bool) -> impl Renderable {
     rsx! {
         <nav id="nav" class="text-text border-b border-b-blue" hx-swap-oob=true[oob]>
             <ul class="flex flex-row items-center justify-center">
-                @for (name, path) in routes {
+                @for route in Page::iter() {
                     <a
-                        href=(path)
+                        href=(route.get_ref())
                         class={
                             "flex items-center justify-center w-20 p-2 font-bold hover:rounded-t"
-                            @if path == selected {
+                            @if route == selected {
                                 " bg-blue rounded-t text-crust hover"
                             } @else {
                                 " text-text hover:rounded-t hover:bg-lavender hover:text-crust"
                             }
                         }
-                        hx-get=(path)
+                        hx-get=(route.get_ref())
                         hx-target="#page"
                         hx-swap="innerHTML"
                         hx-push-url="true"
                     >
                         <li>
-                            (name)
+                            (route.to_string())
                         </li>
                     </a>
                 }
