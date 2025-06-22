@@ -32,7 +32,7 @@ impl Display for Page {
 }
 
 impl Page {
-    fn get_ref(&self) -> &str {
+    pub fn get_ref(&self) -> &str {
         match self {
             Page::Home => "/",
             Page::About => "/about",
