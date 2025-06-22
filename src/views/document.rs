@@ -16,7 +16,7 @@ pub fn document<R: Renderable>(selected: Page, children: &R) -> impl Renderable 
                     name="viewport"
                     content="width=device-width, initial-scale=1.0"
                 >
-                <script src="https://unpkg.com/htmx.org@2"></script>
+                <script src="https://cdn.jsdelivr.net/npm/htmx.org@2.0.5/dist/htmx.min.js" integrity="sha384-t4DxZSyQK+0Uv4jzy5B0QyHyWQD2GFURUmxKMBVww9+e2EJ0ei/vCvv7+79z0fkr" crossorigin="anonymous"></script>
                 <link rel="stylesheet" href="/styles.css">
             </head>
             <body class="bg-base text-gray-100">
