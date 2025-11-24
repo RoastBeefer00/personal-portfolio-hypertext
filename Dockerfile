@@ -1,31 +1,20 @@
 # Stage 1: Build Tailwind CSS
-FROM node:18-slim AS frontend-builder
+FROM debian:12-slim AS frontend-builder
+WORKDIR /app
 
-WORKDIR /app/frontend
+# Install curl for downloading Tailwind CLI
+RUN apt-get update && apt-get install -y curl && rm -rf /var/lib/apt/lists/*
 
-# Copy package.json and package-lock.json (or yarn.lock)
-COPY package.json ./
-# If you're using yarn, copy yarn.lock instead and use yarn install
-# COPY yarn.lock ./
-COPY package-lock.json ./
+# Download standalone Tailwind CLI
+RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/download/tailwindcss-linux-x64 && \
+    chmod +x tailwindcss-linux-x64
 
-# Install dependencies for Tailwind CSS
-RUN npm install
+# Copy Tailwind config and CSS files
+COPY dist/main.css ./dist/
+COPY views/ ./views/
 
-# Copy the rest of your frontend assets and Tailwind config
-# Ensure your tailwind.config.js and your main input CSS file (e.g., styles/tailwind.css) are present
-# COPY tailwind.config.js ./
-COPY tailwind.css ./
- # If your Rust source files influence Tailwind's content scanning (e.g. for class names)
-COPY src ./src
-
-# Run the Tailwind CSS build command
-# Adjust the input and output paths as per your project structure
-# The output CSS will be copied to the final stage
-# RUN npm run build:css # Assuming you have a script like: "tailwindcss -i ./styles/tailwind.css -o ./static/css/main.css --minify" in your package.json
-                     # Or, you can run the npx command directly:
-                     # RUN npx tailwindcss -i ./styles/tailwind.css -o ./static/css/main.css --minify
-RUN npx @tailwindcss/cli -i tailwind.css -o ./static/styles.css --minify
+# Generate CSS with standalone Tailwind CLI
+RUN ./tailwindcss-linux-x64 -i tailwind.css -o ./static/styles.css --minify
 
 # ---
 
@@ -86,7 +75,7 @@ COPY static ./static
 
 # Ensure the binary is executable and owned by the appuser
 RUN chmod +x ./jake-personal-site
-    # Add other directories here if needed: chown -R appuser:appuser ./public
+# Add other directories here if needed: chown -R appuser:appuser ./public
 
 # Switch to the non-root user
 # USER appuser
