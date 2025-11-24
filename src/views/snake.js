@@ -1,12 +1,18 @@
 import init from "/wasm/bevy_snake.js";
-init().catch((error) => {
-  if (
-    !error.message.startsWith(
-      "Using exceptions for control flow, don't mind me. This isn't actually an error!",
-    )
-  ) {
-    throw error;
-  }
-});
-const elementToRemove = document.getElementById("bevy-loading");
-elementToRemove.remove();
+
+// Initialize the WASM module
+init()
+  .then(() => {
+    console.log("Bevy game loaded successfully");
+    const loading = document.getElementById("bevy-loading");
+    if (loading) {
+      loading.remove();
+    }
+  })
+  .catch((error) => {
+    console.error("Failed to load Bevy game:", error);
+    const loading = document.getElementById("bevy-loading");
+    if (loading) {
+      loading.textContent = "Failed to load game: " + error.message;
+    }
+  });

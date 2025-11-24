@@ -1,9 +1,0 @@
-{
-  "dependencies": {
-    "@tailwindcss/cli": "^4.1.7",
-    "tailwindcss": "^4.1.7"
-  },
-  "devDependencies": {
-    "@catppuccin/tailwindcss": "^0.1.6"
-  }
-}

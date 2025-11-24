@@ -6,15 +6,8 @@ fn main() {
     println!("cargo:rerun-if-changed=src/views/");
     println!("cargo:rerun-if-changed={TAILWIND_CSS}");
 
-    let output = Command::new("npx")
-        .args([
-            "@tailwindcss/cli",
-            "-i",
-            TAILWIND_CSS,
-            "-o",
-            "static/styles.css",
-            "--minify",
-        ])
+    let output = Command::new("tailwindcss")
+        .args(["-i", TAILWIND_CSS, "-o", "static/styles.css", "--minify"])
         .output()
         .expect("failed to execute `tailwindcss`");
 

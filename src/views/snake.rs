@@ -25,6 +25,6 @@ pub fn snake() -> impl Renderable {
         <div class="flex justify-center items-center text-center text-text mt-14" id="bevy-loading">
             <span>"Loading..."</span>
         </div>
-        <canvas class="mt-10 mx-auto w-[800px] h-[800px] mb-4" id="snake-canvas"></canvas>
+        <canvas class="mt-10 mx-auto w-[800px] h-[800px] mb-4" id="snake-canvas" width="800" height="800"></canvas>
     }
 }
