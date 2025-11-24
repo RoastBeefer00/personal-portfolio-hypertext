@@ -60,7 +60,7 @@ WORKDIR /app
 
 # Copy static assets (including Tailwind CSS output) from the frontend-builder stage
 # Adjust the source path if your Tailwind output is different
-COPY --from=frontend-builder /app/frontend/static ./static
+COPY --from=frontend-builder /app/src/static ./static
 
 # Copy HTML templates
 # COPY templates ./templates
