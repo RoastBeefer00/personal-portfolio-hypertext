@@ -10,7 +10,7 @@ RUN curl -sLO https://github.com/tailwindlabs/tailwindcss/releases/latest/downlo
     chmod +x tailwindcss-linux-x64
 
 # Copy Tailwind config and CSS files
-COPY dist/main.css ./dist/
+COPY tailwind.css .
 COPY views/ ./views/
 
 # Generate CSS with standalone Tailwind CLI
