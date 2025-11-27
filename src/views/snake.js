@@ -1,4 +1,4 @@
-import init from "/wasm/bevy_snake.js";
+import init from "/wasm/bevy_snake-37f97249cb645107.js";
 
 // Initialize the WASM module
 init()
