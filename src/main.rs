@@ -3,7 +3,7 @@ use std::net::Ipv4Addr;
 use crate::views::Page;
 use anyhow::Result;
 use axum::{Router, routing::get};
-use handlers::{handle_about, handle_home, handle_projects, handle_snake};
+use handlers::{handle_about, handle_home, handle_life, handle_projects, handle_snake};
 use tokio::net::TcpListener;
 use tower_http::services::ServeDir;
 use tower_livereload::LiveReloadLayer;
@@ -18,6 +18,7 @@ async fn main() -> Result<()> {
         .route(Page::About.get_ref(), get(handle_about))
         .route(Page::Projects.get_ref(), get(handle_projects))
         .route(Page::Snake.get_ref(), get(handle_snake))
+        .route(Page::Life.get_ref(), get(handle_life))
         .fallback_service(ServeDir::new("static").precompressed_gzip());
 
     if cfg!(debug_assertions) {
