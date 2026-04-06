@@ -1,0 +1,15 @@
+{
+  "name": "conway-game-of-life-rs",
+  "type": "module",
+  "version": "0.1.0",
+  "files": [
+    "conway_game_of_life_rs_bg.wasm",
+    "conway_game_of_life_rs.js",
+    "conway_game_of_life_rs.d.ts"
+  ],
+  "main": "conway_game_of_life_rs.js",
+  "types": "conway_game_of_life_rs.d.ts",
+  "sideEffects": [
+    "./snippets/*"
+  ]
+}
