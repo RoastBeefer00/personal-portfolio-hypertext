@@ -1,6 +1,7 @@
 mod about;
 mod document;
 mod home;
+mod life;
 mod nav;
 mod projects;
 mod snake;
@@ -10,7 +11,9 @@ use std::fmt::Display;
 
 use strum::EnumIter;
 
-pub use self::{about::*, document::*, home::*, nav::*, projects::*, snake::*, stack_card::*};
+pub use self::{
+    about::*, document::*, home::*, life::*, nav::*, projects::*, snake::*, stack_card::*,
+};
 
 #[derive(EnumIter, Debug, Clone, Copy, PartialEq, Eq)]
 pub enum Page {
@@ -18,6 +21,7 @@ pub enum Page {
     About,
     Projects,
     Snake,
+    Life,
 }
 
 impl Display for Page {
@@ -27,6 +31,7 @@ impl Display for Page {
             Page::About => write!(f, "About"),
             Page::Projects => write!(f, "Projects"),
             Page::Snake => write!(f, "Snake"),
+            Page::Life => write!(f, "Life"),
         }
     }
 }
@@ -38,6 +43,7 @@ impl Page {
             Page::About => "/about",
             Page::Projects => "/projects",
             Page::Snake => "/snake",
+            Page::Life => "/life",
         }
     }
 }

@@ -30,3 +30,9 @@
   --color-mantle: #181825;
   --color-crust: #11111b;
 }
+
+@layer components {
+  #game-of-life-canvas {
+    image-rendering: pixelated;
+  }
+}

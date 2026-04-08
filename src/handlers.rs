@@ -2,7 +2,7 @@ use axum::response::IntoResponse;
 use axum_htmx::HxRequest;
 use hypertext::prelude::*;
 
-use crate::views::{Document, Nav, Page, about, home, projects, snake};
+use crate::views::{Document, Nav, Page, about, home, life, projects, snake};
 
 fn maybe_document<R: Renderable>(
     HxRequest(is_hx_request): HxRequest,
@@ -35,4 +35,8 @@ pub async fn handle_projects(hx_request: HxRequest) -> impl IntoResponse {
 
 pub async fn handle_snake(hx_request: HxRequest) -> impl IntoResponse {
     maybe_document(hx_request, Page::Snake, snake())
+}
+
+pub async fn handle_life(hx_request: HxRequest) -> impl IntoResponse {
+    maybe_document(hx_request, Page::Life, life())
 }
