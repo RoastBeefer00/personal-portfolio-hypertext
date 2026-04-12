@@ -10,7 +10,7 @@ version = "1.0.0"
 anyhow = "1"
 axum = "0.8"
 axum-htmx = "0.7"
-hypertext = { git = "https://github.com/vidhanio/hypertext", features = ["axum", "htmx"] }
+hypertext = { version = "0.12.1", features = ["axum", "htmx"] }
 strum = { version = "0.27.1", features = ["derive", "strum_macros"] }
 tokio = { version = "1", features = ["macros", "rt-multi-thread"] }
 tower-http = { version = "0.6", features = ["fs"] }
