@@ -1,7 +1,7 @@
 use hypertext::Raw;
 use hypertext::prelude::*;
 
-const SNAKE_JS: Raw<&'static str> = Raw(include_str!("snake.js"));
+const SNAKE_JS: Raw<&'static str> = Raw::dangerously_create(include_str!("snake.js"));
 
 #[component]
 pub fn snake() -> impl Renderable {

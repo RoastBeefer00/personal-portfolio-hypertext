@@ -284,12 +284,12 @@ dependencies = [
 
 [[package]]
 name = "hypertext"
-version = "0.9.0"
-source = "git+https://github.com/vidhanio/hypertext#efa9ba9bb589fb21ddc7766a0bf90f5d61759e3d"
+version = "0.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "eb73b82c6a76434fd87a0668ef3ff1a8182512dfb610eef9138169a7e2d3a0ed"
 dependencies = [
  "axum-core",
  "html-escape",
- "http",
  "hypertext-macros",
  "itoa",
  "ryu",
@@ -297,8 +297,9 @@ dependencies = [
 
 [[package]]
 name = "hypertext-macros"
-version = "0.9.0"
-source = "git+https://github.com/vidhanio/hypertext#efa9ba9bb589fb21ddc7766a0bf90f5d61759e3d"
+version = "0.12.1"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "c120534b9d41bd317a5b111aacc38a34071d15df9462c0e21f6093ade3a03660"
 dependencies = [
  "html-escape",
  "proc-macro2",

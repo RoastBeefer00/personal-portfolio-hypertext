@@ -1,9 +1,39 @@
 use hypertext::Raw;
 use hypertext::prelude::*;
 
-const RUN_LIFE_JS: Raw<&'static str> = Raw(include_str!("run_life_js.js"));
-const RUN_LIFE_WASM: Raw<&'static str> = Raw(include_str!("run_life_wasm.js"));
-const RUN_BENCH_JS: Raw<&'static str> = Raw(include_str!("run_bench.js"));
+const RUN_LIFE_JS: Raw<&'static str> = Raw::dangerously_create(include_str!("run_life_js.js"));
+const RUN_LIFE_WASM: Raw<&'static str> = Raw::dangerously_create(include_str!("run_life_wasm.js"));
+const RUN_BENCH_JS: Raw<&'static str> = Raw::dangerously_create(include_str!("run_bench.js"));
+
+#[component]
+pub fn life_page() -> impl Renderable {
+    rsx! {
+        <div "x-data"="{ tab: 'game' }">
+            <div class="flex gap-2 mb-4 justify-center items-center mx-auto">
+                <button
+                    "x-on:click"="tab = 'game'"
+                    "x-bind:class"="tab === 'game' ? 'bg-blue' : 'bg-surface1'"
+                    class="rounded-tl rounded-bl p-2 px-4 text-crust"
+                >
+                    "Game"
+                </button>
+                <button
+                    "x-on:click"="tab = 'bench'"
+                    "x-bind:class"="tab === 'bench' ? 'bg-blue' : 'bg-surface1'"
+                    class="rounded-tr rounded-br p-2 px-4 text-crust"
+                >
+                    "Benchmark"
+                </button>
+            </div>
+            <div "x-show"="tab === 'game'">
+                (life())
+            </div>
+            <div "x-show"="tab === 'bench'">
+                (bench())
+            </div>
+        </div>
+    }
+}
 
 #[component]
 pub fn life() -> impl Renderable {
@@ -14,13 +44,6 @@ pub fn life() -> impl Renderable {
             <script type="module">
                 (RUN_LIFE_WASM)
             </script>
-            <div
-                class="bg-blue rounded justify-center text-center flex flex-col mx-auto m-6 p-6 lg:w-1/2"
-            >
-                <h1 class="text-4xl lg:text-6xl text-crust flex-none">
-                    <b>"Conway's Game of Life"</b>
-                </h1>
-            </div>
             <div class="w-full h-full flex flex-col items-center p-4 box-border">
                 <div id="controls" class="flex flex-1 w-full mx-auto justify-center items-center mb-4">
                     <input id="game-of-life-size" type="number" value="64" min="1" max="1000" step="1" class="bg-white p-2 text-crust rounded mx-2">
@@ -38,7 +61,6 @@ pub fn life() -> impl Renderable {
                     <canvas id="game-of-life-canvas"></canvas>
                 </div>
             </div>
-            (bench())
         }
 }
 
