@@ -1,7 +1,6 @@
 import { Universe as JsUniverse } from "/game_of_life.js";
-import init, { run_benchmark as runBenchMarkWasm } from "/game-of-life/conway_game_of_life_rs.js";
-
-const wasm = await init();
+import { run_benchmark as runBenchMarkWasm } from "/wasm_init.js";
+import { wasm } from "/wasm_init.js";
 
 const status = document.getElementById('bench-status');
 

@@ -1,4 +1,4 @@
-import init, { Universe } from "/game-of-life/conway_game_of_life_rs.js";
+import { wasm, Universe } from "/wasm_init.js";
 
 const SCALE = 4;
 const canvas = document.getElementById("game-of-life-canvas");
@@ -9,7 +9,6 @@ let active = false;
 let animFrame = null;
 
 // Init WASM eagerly so it's ready when needed
-const wasm = await init();
 memory = wasm.memory;
 
 const setup = () => {
