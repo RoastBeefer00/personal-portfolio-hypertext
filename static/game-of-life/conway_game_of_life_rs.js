@@ -1,5 +1,91 @@
 /* @ts-self-types="./conway_game_of_life_rs.d.ts" */
 
+export class BenchmarkResult {
+    static __wrap(ptr) {
+        ptr = ptr >>> 0;
+        const obj = Object.create(BenchmarkResult.prototype);
+        obj.__wbg_ptr = ptr;
+        BenchmarkResultFinalization.register(obj, obj.__wbg_ptr, obj);
+        return obj;
+    }
+    __destroy_into_raw() {
+        const ptr = this.__wbg_ptr;
+        this.__wbg_ptr = 0;
+        BenchmarkResultFinalization.unregister(this);
+        return ptr;
+    }
+    free() {
+        const ptr = this.__destroy_into_raw();
+        wasm.__wbg_benchmarkresult_free(ptr, 0);
+    }
+    /**
+     * @returns {number}
+     */
+    get avg() {
+        const ret = wasm.__wbg_get_benchmarkresult_avg(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {number}
+     */
+    get max() {
+        const ret = wasm.__wbg_get_benchmarkresult_max(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {number}
+     */
+    get min() {
+        const ret = wasm.__wbg_get_benchmarkresult_min(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {number}
+     */
+    get total() {
+        const ret = wasm.__wbg_get_benchmarkresult_total(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @returns {number}
+     */
+    get tps() {
+        const ret = wasm.__wbg_get_benchmarkresult_tps(this.__wbg_ptr);
+        return ret;
+    }
+    /**
+     * @param {number} arg0
+     */
+    set avg(arg0) {
+        wasm.__wbg_set_benchmarkresult_avg(this.__wbg_ptr, arg0);
+    }
+    /**
+     * @param {number} arg0
+     */
+    set max(arg0) {
+        wasm.__wbg_set_benchmarkresult_max(this.__wbg_ptr, arg0);
+    }
+    /**
+     * @param {number} arg0
+     */
+    set min(arg0) {
+        wasm.__wbg_set_benchmarkresult_min(this.__wbg_ptr, arg0);
+    }
+    /**
+     * @param {number} arg0
+     */
+    set total(arg0) {
+        wasm.__wbg_set_benchmarkresult_total(this.__wbg_ptr, arg0);
+    }
+    /**
+     * @param {number} arg0
+     */
+    set tps(arg0) {
+        wasm.__wbg_set_benchmarkresult_tps(this.__wbg_ptr, arg0);
+    }
+}
+if (Symbol.dispose) BenchmarkResult.prototype[Symbol.dispose] = BenchmarkResult.prototype.free;
+
 /**
  * @enum {1 | 0}
  */
@@ -76,10 +162,19 @@ export function main() {
     wasm.main();
 }
 
+/**
+ * @param {number} size
+ * @param {number} iterations
+ * @returns {BenchmarkResult}
+ */
+export function run_benchmark(size, iterations) {
+    const ret = wasm.run_benchmark(size, iterations);
+    return BenchmarkResult.__wrap(ret);
+}
 function __wbg_get_imports() {
     const import0 = {
         __proto__: null,
-        __wbg___wbindgen_throw_81fc77679af83bc6: function(arg0, arg1) {
+        __wbg___wbindgen_throw_6b64449b9b9ed33c: function(arg0, arg1) {
             throw new Error(getStringFromWasm0(arg0, arg1));
         },
         __wbg_error_a6fa202b58aa1cd3: function(arg0, arg1) {
@@ -98,6 +193,10 @@ function __wbg_get_imports() {
         }, arguments); },
         __wbg_new_227d7c05414eb861: function() {
             const ret = new Error();
+            return ret;
+        },
+        __wbg_now_a9b7df1cbee90986: function() {
+            const ret = Date.now();
             return ret;
         },
         __wbg_stack_3b0d974bbf31e44f: function(arg0, arg1) {
@@ -123,6 +222,9 @@ function __wbg_get_imports() {
     };
 }
 
+const BenchmarkResultFinalization = (typeof FinalizationRegistry === 'undefined')
+    ? { register: () => {}, unregister: () => {} }
+    : new FinalizationRegistry(ptr => wasm.__wbg_benchmarkresult_free(ptr >>> 0, 1));
 const UniverseFinalization = (typeof FinalizationRegistry === 'undefined')
     ? { register: () => {}, unregister: () => {} }
     : new FinalizationRegistry(ptr => wasm.__wbg_universe_free(ptr >>> 0, 1));
