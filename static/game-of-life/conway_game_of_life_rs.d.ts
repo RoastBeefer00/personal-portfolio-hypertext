@@ -1,6 +1,17 @@
 /* tslint:disable */
 /* eslint-disable */
 
+export class BenchmarkResult {
+    private constructor();
+    free(): void;
+    [Symbol.dispose](): void;
+    avg: number;
+    max: number;
+    min: number;
+    total: number;
+    tps: number;
+}
+
 export enum Cell {
     Alive = 1,
     Dead = 0,
@@ -21,12 +32,26 @@ export class Universe {
 
 export function main(): void;
 
+export function run_benchmark(size: number, iterations: number): BenchmarkResult;
+
 export type InitInput = RequestInfo | URL | Response | BufferSource | WebAssembly.Module;
 
 export interface InitOutput {
     readonly memory: WebAssembly.Memory;
+    readonly __wbg_benchmarkresult_free: (a: number, b: number) => void;
+    readonly __wbg_get_benchmarkresult_avg: (a: number) => number;
+    readonly __wbg_get_benchmarkresult_max: (a: number) => number;
+    readonly __wbg_get_benchmarkresult_min: (a: number) => number;
+    readonly __wbg_get_benchmarkresult_total: (a: number) => number;
+    readonly __wbg_get_benchmarkresult_tps: (a: number) => number;
+    readonly __wbg_set_benchmarkresult_avg: (a: number, b: number) => void;
+    readonly __wbg_set_benchmarkresult_max: (a: number, b: number) => void;
+    readonly __wbg_set_benchmarkresult_min: (a: number, b: number) => void;
+    readonly __wbg_set_benchmarkresult_total: (a: number, b: number) => void;
+    readonly __wbg_set_benchmarkresult_tps: (a: number, b: number) => void;
     readonly __wbg_universe_free: (a: number, b: number) => void;
     readonly main: () => void;
+    readonly run_benchmark: (a: number, b: number) => number;
     readonly universe_cells: (a: number) => number;
     readonly universe_height: (a: number) => number;
     readonly universe_new: (a: number, b: number) => number;

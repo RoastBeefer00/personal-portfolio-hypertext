@@ -26,6 +26,7 @@ const setup = () => {
 
 const drawCells = () => {
   universe.render();
+  const memory = wasm.memory;
   const pixels = new Uint8ClampedArray(memory.buffer, ptr, width * height * 4);
   ctx.putImageData(new ImageData(pixels, width, height), 0, 0);
 };
