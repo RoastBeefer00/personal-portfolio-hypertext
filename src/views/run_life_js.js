@@ -38,22 +38,21 @@ const start = () => {
   animFrame = requestAnimationFrame(renderLoop);
 };
 
-// Button wiring lives here since JS script loads first
-document.addEventListener('DOMContentLoaded', () => {
-  const jsBtn = document.getElementById('impl-js');
-  const wasmBtn = document.getElementById('impl-wasm');
+// Button wiring — module scripts are deferred and work on both initial load
+// and HTMX swap (unlike DOMContentLoaded which only fires once per page load)
+const jsBtn = document.getElementById('impl-js');
+const wasmBtn = document.getElementById('impl-wasm');
 
-  function setActive(impl) {
-    jsBtn.classList.toggle('bg-green', impl === 'js');
-    jsBtn.classList.toggle('bg-surface1', impl !== 'js');
-    wasmBtn.classList.toggle('bg-green', impl === 'wasm');
-    wasmBtn.classList.toggle('bg-surface1', impl !== 'wasm');
-    window.dispatchEvent(new CustomEvent('life-impl-change', { detail: impl }));
-  }
+function setActive(impl) {
+  jsBtn.classList.toggle('bg-green', impl === 'js');
+  jsBtn.classList.toggle('bg-surface1', impl !== 'js');
+  wasmBtn.classList.toggle('bg-green', impl === 'wasm');
+  wasmBtn.classList.toggle('bg-surface1', impl !== 'wasm');
+  window.dispatchEvent(new CustomEvent('life-impl-change', { detail: impl }));
+}
 
-  jsBtn.addEventListener('click', () => setActive('js'));
-  wasmBtn.addEventListener('click', () => setActive('wasm'));
-});
+jsBtn.addEventListener('click', () => setActive('js'));
+wasmBtn.addEventListener('click', () => setActive('wasm'));
 
 window.addEventListener('life-impl-change', (e) => {
   active = e.detail === 'js';
