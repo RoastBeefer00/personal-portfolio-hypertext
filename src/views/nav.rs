@@ -7,19 +7,18 @@ use super::Page;
 #[component]
 pub fn nav(selected: Page, oob: bool) -> impl Renderable {
     rsx! {
-        <nav id="nav" class="text-text border-b border-b-blue" hx-swap-oob=true[oob]>
-            <ul class="flex flex-row items-center justify-center">
+        <nav id="nav" class="bg-mantle text-text border-b-2 border-blue" hx-swap-oob=true[oob]>
+            <ul class="flex flex-row items-center justify-center gap-1 px-2 pt-1">
                 @for route in Page::iter() {
-                    <li
-                    >
+                    <li>
                         <a
                             href=(route.get_ref())
                             class={
-                                "flex items-center justify-center w-20 p-2 font-bold hover:rounded-t"
+                                "flex items-center justify-center px-4 py-2 rounded-t font-semibold transition-colors"
                                 @if route == selected {
-                                    " bg-blue rounded-t text-crust hover"
+                                    " bg-blue text-crust"
                                 } @else {
-                                    " text-text hover:rounded-t hover:bg-lavender hover:text-crust"
+                                    " text-subtext1 hover:bg-surface0 hover:text-text"
                                 }
                             }
                             hx-get=(route.get_ref())
